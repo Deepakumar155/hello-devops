@@ -9,9 +9,21 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+        stage('Compile') {
             steps {
-                sh 'mvn clean test'
+                sh 'mvn compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                sh 'mvn package -DskipTests'
             }
         }
     }
