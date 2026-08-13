@@ -26,10 +26,17 @@ pipeline {
                 sh 'mvn package -DskipTests'
             }
         }
-	stage('Archive Artifact') {
-    steps {
-        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-    }
-}	
+
+        stage('Archive Artifact') {
+            steps {
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'cp target/*.jar /opt/hello-devops/'
+            }
+        }
     }
 }
